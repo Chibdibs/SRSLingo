@@ -23,3 +23,8 @@ We welcome contributions to SRSLingo! Whether it's adding new features, improvin
 ### License
 
 SRSLingo devloped by Nino Ross is released under the MIT License. See LICENSE file for details.
+
+
+![DALL·E 2024-02-27 02 13 12- Copy](https://github.com/Chibdibs/SRSLingo/assets/9670771/b8a04e1f-3318-40c6-b50f-860c4a716f3e)
+
+![DALL·E 2024-02-27 02 12 09 - Copy](https://github.com/Chibdibs/SRSLingo/assets/9670771/e3046bb1-f7bb-421e-9fd6-19c0dfbc62d2)
