@@ -15,3 +15,11 @@ At the heart of SRSLingo is the Spaced Repetition System (SRS), a scientifically
 
 - **Gamified Learning:** Engage with the language through interactive exercises and games that make learning fun and motivating.
 - **Real-World Context:** Learn with sentences and dialogues from real-life scenarios that prepare you to use the language authentically and confidently.
+
+### Contributing
+
+We welcome contributions to SRSLingo! Whether it's adding new features, improving existing ones, or reporting bugs, your input helps make SRSLingo better for everyone.
+
+### License
+
+SRSLingo devloped by Nino Ross is released under the MIT License. See LICENSE file for details.
