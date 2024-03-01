@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section id="hero">
+        <h1>Welcome to SRSLingo!</h1>
+
+        <h3>Unlock the World with Every Word</h3>
+        <p>Join SRSLingo today and start your journey to language mastery with our AI-driven learning platform.</p>
+
+        <a href="{% url 'register' %}" class="cta">Get Started</a>
+    </section>
+
+    <section id="features">
+        <h2>Powerful Learning Tools</h2>
+        <div class="feature-item">
+            <h3>Spaced Repetition System</h3>
+            <p>Maximize retention with our scientifically proven SRS methodology.</p>
+        </div>
+        <div class="feature-item">
+            <h3>AI-Driven Lessons</h3>
+            <p>Personalized learning experiences that adapt to your progress.</p>
+        </div>
+        <div class="feature-item">
+            <h3>Community Support</h3>
+            <p>Join a community of learners and share knowledge and achievements.</p>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <h2>What Our Users Say</h2>
+        <div class="testimonial-item">
+            <p>"SRSLingo has transformed the way I learn languages. The SRS method is a game-changer!"</p>
+            <cite>– Jane Doe</cite>
+        </div>
+        <div class="testimonial-item">
+            <p>"Thanks to SRSLingo, I'm now fluent in Spanish and working on my third language!"</p>
+            <cite>– John Smith</cite>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <h2>Choose Your Plan</h2>
+        <div class="pricing-item">
+            <h3>Free</h3>
+            <p>Access basic lessons and community support.</p>
+        </div>
+        <div class="pricing-item">
+            <h3>Premium</h3>
+            <p>Unlock all features, including advanced lessons and analytics, for $9.99/month.</p>
+        </div>
+    </section>
+
+    <section id="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h3>How does SRS work?</h3>
+            <p>SRS optimizes your review schedule based on how well you remember each word or concept.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Can I learn more than one language at a time?</h3>
+            <p>Yes, SRSLingo supports learning multiple languages simultaneously.</p>
+        </div>
+    </section>
+
+{% endblock %}

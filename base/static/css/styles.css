@@ -1,0 +1,215 @@
+:root {
+    --sky-blue: #00AEEF;
+    --sunset-orange: #FF7043;
+    --slate-gray: #5F7A76;
+    --cream: #FFF5E1;
+    --teal: #008080;
+    --coral: #FF6B6B;
+}
+
+body, html {
+    font-family: Arial, sans-serif;
+    background-color: var(--cream);
+    /*color: var(--slate-gray);*/
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column; /* Stack main content and footer vertically */
+    height: 100%; /* Ensure full page height */
+    margin: 0;
+    padding: 0;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit; /* Ensure padding and borders are included in total width and height */
+}
+
+header, .header, footer, .footer {
+    background-color: var(--sky-blue);
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+footer {
+    position: relative; /* Changed from fixed to relative */
+    width: 100%;
+    clear: both; /* Ensure footer is below all content */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; /* Ensure nav list has no default margin */
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a, a {
+    text-decoration: none;
+}
+
+#features {
+    background-color: var(--cream);
+    padding: 2rem;
+    text-align: center;
+}
+
+.feature-item {
+    margin: 1rem 0;
+}
+
+.registration-link {
+    color: var(--sky-blue);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+#testimonials {
+    background-color: var(--sky-blue);
+    color: #fff;
+    padding: 2rem;
+    text-align: center;
+}
+
+.testimonial-item {
+    margin: 1rem 0;
+    font-style: italic;
+}
+
+#pricing {
+    background-color: var(--slate-gray);
+    color: #fff;
+    padding: 2rem;
+    text-align: center;
+}
+
+.pricing-item {
+    margin: 1rem 0;
+    background-color: #fff;
+    color: var(--slate-gray);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+#faq {
+    background-color: var(--cream);
+    padding: 2rem;
+    text-align: left; /* FAQ content typically benefits from left-aligned text for readability */
+}
+
+.faq-item {
+    margin: 1rem 0;
+}
+
+.registration-link:hover {
+    color: var(--teal);
+    text-decoration: none; /* Removes underline on hover */
+}
+
+.cta {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: var(--sunset-orange);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.cta:hover {
+    background-color: var(--teal);
+}
+
+#hero {
+    background-color: var(--sky-blue);
+    color: #ffffff;
+    padding: 2rem;
+    text-align: center;
+}
+
+.form-container, .registration-container {
+    text-align: center; /* Center container content */
+}
+
+.content {
+    flex: 1; /* Allows content to expand and push the footer down */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.home-link {
+    color: #fff; /* Specific color for the Home link */
+    padding: 8px 12px; /* Adds padding around the text */
+    border-radius: 5px; /* Optional: Rounds the corners for a button-like appearance */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.home-link:hover {
+    color: var(--slate-gray); /* Text color on hover */
+    text-decoration: none; /* Removes underline on hover */
+}
+
+form {
+    display: inline-block; /* Align form to the center of its container */
+    max-width: 400px;
+    margin: 20px auto; /* Center form horizontally and add vertical spacing */
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.form-container, form {
+    max-width: 400px; /* Adjust this value as needed to increase width */
+    margin: 20px auto; /* Keep the form centered */
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.form-field {
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    /*display: block;*/
+    /*margin-bottom: 5px;*/
+}
+
+.form-field input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+h2 {
+    text-align: center; /* Center headings */
+}
+
+/* Ensure input fields fill the form container */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="submit"] {
+    width: 100%; /* Full width of the form container */
+    padding: 10px;
+    margin: 10px 0; /* Add some space between fields */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+    background-color: var(--teal);
+    color: white;
+}
+
+input[type="submit"]:hover {
+    background-color: var(--sunset-orange);
+}

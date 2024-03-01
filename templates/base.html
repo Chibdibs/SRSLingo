@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRSLingo - Learn Languages</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Additional CSS files or external resources -->
+</head>
+<body>
+    <header>
+        <nav>
+            <!-- Navigation bar -->
+            <ul>
+                <li><a href="{% url 'landing' %}" class="home-link">Home</a></li>
+                <!-- Add more navigation items here -->
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content">
+        {% block content %}
+        <!-- Content overridden by child templates -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <!-- Footer content -->
+        <p>&copy; 2024 SRSLingo. All rights reserved.</p>
+    </footer>
+
+    <!-- Additional JavaScript files or external scripts -->
+</body>
+</html>
