@@ -1,9 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
 
+from SRSLingo.settings import FIREBASE_CONFIG
 from base.forms import UserRegisterForm
 
 
@@ -35,3 +36,9 @@ def register(request):
     else:
         form = UserRegisterForm()
     return render(request, 'registration/register.html', {'form': form})
+
+
+def my_view(request):
+    context = {'firebase_config': FIREBASE_CONFIG,
+               }
+    return render(request, 'base.html', context)

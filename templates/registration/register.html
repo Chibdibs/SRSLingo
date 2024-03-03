@@ -1,31 +1,36 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="form-container">
-    <h2>Register</h2>
-    <form method="post">
-        {% csrf_token %}
-        {% for field in form %}
-            <div class="form-field">
-                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" id="{{ field.id_for_label }}">
-                <!-- Explicitly not showing field.errors and field.help_text -->
-            </div>
-        {% endfor %}
-        <button type="submit" class="cta">Register</button>
-    </form>
+    <div class="form-container">
+        <h2>Register</h2>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-field">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" id="{{ field.id_for_label }}">
+                    <!-- Explicitly not showing field.errors and field.help_text -->
+                </div>
+            {% endfor %}
+            <button type="submit" class="cta">Register</button>
+        </form>
 
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% if email_exists %}
-    <p>An account with this email already exists. <a href="{% url 'login' %}" class="cta">Login Here</a></p>
-    {% else %}
-    <p>Already have an account? <a href="{% url 'login' %}" class="registration-link">Login</a></p>
-    {% endif %}
-</div>
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% if email_exists %}
+        <p>An account with this email already exists. <a href="{% url 'login' %}" class="cta">Login Here</a></p>
+        {% else %}
+        <p>Already have an account? <a href="{% url 'login' %}" class="registration-link">Login</a></p>
+        {% endif %}
+
+    <button id="google-register">Register with Google</button>
+    </div>
+
+    <script src="{% static 'js/register.js' %}"></script>
 {% endblock %}

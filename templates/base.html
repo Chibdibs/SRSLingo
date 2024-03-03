@@ -1,35 +1,58 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SRSLingo - Learn Languages</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <!-- Additional CSS files or external resources -->
-</head>
-<body>
-    <header>
-        <nav>
-            <!-- Navigation bar -->
-            <ul>
-                <li><a href="{% url 'landing' %}" class="home-link">Home</a></li>
-                <!-- Add more navigation items here -->
-            </ul>
-        </nav>
-    </header>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SRSLingo - Learn Languages</title>
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    </head>
 
-    <main class="content">
-        {% block content %}
-        <!-- Content overridden by child templates -->
-        {% endblock %}
-    </main>
+    <body>
+        <header>
+            <nav>
+                <!-- Navigation bar -->
+                <ul>
+                    <li><a href="{% url 'landing' %}" class="home-link">Home</a></li>
+                    <!-- Add more navigation items here -->
+                </ul>
+            </nav>
+        </header>
 
-    <footer>
-        <!-- Footer content -->
-        <p>&copy; 2024 SRSLingo. All rights reserved.</p>
-    </footer>
+        <main class="content">
+            {% block content %}
+            <!-- Content overridden by child templates -->
+            {% endblock %}
+        </main>
 
-    <!-- Additional JavaScript files or external scripts -->
-</body>
+        <footer>
+            <!-- Footer content -->
+            <p>&copy; 2024 SRSLingo. All rights reserved.</p>
+        </footer>
+
+        <!-- Additional JavaScript files or external scripts -->
+    </body>
+
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      // Firebase configuration from Flask
+      const firebaseConfig = {{ firebase_config|safe }};
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js" defer></script>
+
+    <!-- Firebase Auth Script -->
+    <script src="{% static 'js/firebase-auth.js' %}" type="module"></script>
 </html>
