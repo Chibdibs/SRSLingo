@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base',
     'language_app',
+    'SRSLingo',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,15 @@ LOGIN_REDIRECT_URL = 'home'
 
 # Redirect to landing page after logout
 LOGOUT_REDIRECT_URL = 'landing'
+
+FIREBASE_CONFIG = {
+    'apiKey': os.environ.get('FIREBASE_API_KEY'),
+    'authDomain': os.environ.get('FIREBASE_AUTH_DOMAIN'),
+    'projectId': os.environ.get('FIREBASE_PROJECT_ID'),
+    'storageBucket': os.environ.get('FIREBASE_STORAGE_BUCKET'),
+    'messagingSenderId': os.environ.get('FIREBASE_MESSAGING_SENDER_ID'),
+    'appId': os.environ.get('FIREBASE_APP_ID'),
+    'measurementId': os.environ.get('FIREBASE_MEASUREMENT_ID')
+}
+
+AUTH_USER_MODEL = 'SRSLingo.CustomUser'

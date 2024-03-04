@@ -55,4 +55,25 @@
 
     <!-- Firebase Auth Script -->
     <script src="{% static 'js/firebase-auth.js' %}" type="module"></script>
+    <script>
+      // Assuming firebaseApp is your Firebase application initialization object
+      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // User is signed in, redirect to dashboard
+          if (window.location.pathname === '/' || window.location.pathname === '/login' || window.location.pathname === '/register') {
+            window.location.href = '/dashboard'; // Adjust the path as necessary
+          }
+        } else {
+          // No user is signed in, redirect to landing page
+          // Assuming you want to keep them on registration or login page if they are there
+          if (window.location.pathname === '/dashboard') {
+            window.location.href = '/'; // Adjust as necessary
+          }
+        }
+      });
+    </script>
+
 </html>
