@@ -11,29 +11,12 @@ from firebase_admin import auth, credentials
 
 from SRSLingo.settings import FIREBASE_CONFIG
 from base.forms import UserRegisterForm
-from models import CustomUser as User
+# from models import CustomUser as User
 from django.contrib.auth import login
 
 # Initialize Firebase Admin
-cred = credentials.Certificate('path/to/your/firebase-adminsdk.json')
-default_app = firebase_admin.initialize_app(cred)
-
-# Inside your verify_token view
-user, created = User.objects.get_or_create(firebase_uid=uid,
-                                           defaults={'email': decoded_token.get('email'), 'username': uid})
-# Log the user in
-login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-
-
-@login_required
-def home(request):
-    return render(request, 'home.html')
-
-
-def landing_page(request):
-    if request.user.is_authenticated:
-        return redirect('home')  # Assumes you have a named URL 'home' for your homepage
-    return render(request, 'landing.html')
+cred = credentials.Certificate("srslingo-firebase-adminsdk-i3v0c-109f95bbf5.json")
+firebase_admin.initialize_app(cred)
 
 
 def register(request):
@@ -61,40 +44,41 @@ def my_view(request):
     return render(request, 'base.html', context)
 
 
-def verify_token(request):
-    id_token = request.POST.get("idToken")
-    try:
-        decoded_token = auth.verify_id_token(id_token)
-        uid = decoded_token['uid']
-        # Create session, login user, or whatever you need
-        return HttpResponse("User authenticated; UID: " + uid)
-    except ValueError:
-        # Handle error: invalid token
-        return HttpResponse("Authentication failed.", status=401)
-
-
 @csrf_exempt
 @require_POST
 def verify_token(request):
-    data = json.loads(request.body)
-    id_token = data.get('token')
-
+    id_token = request.POST.get('token')
     try:
         decoded_token = auth.verify_id_token(id_token)
-        uid = decoded_token['uid']
+        uid = decoded_token.get('uid')
+        email = decoded_token.get('email')
 
-        # Optionally, check if the user already exists in your database
         User = get_user_model()
-        user, created = User.objects.get_or_create(username=uid, defaults={'email': decoded_token.get('email')})
+        user, created = User.objects.get_or_create(username=uid, defaults={'email': email})
 
-        # Log the user in
-        user.backend = 'django.contrib.auth.backends.ModelBackend'  # Specify the backend to avoid errors
+        # Optionally set user details here
+        if created:
+            user.email = email  # Example: set email on user object if newly created
+            user.save()
+
+        user.backend = 'django.contrib.auth.backends.ModelBackend'
         login(request, user)
 
         return JsonResponse({'message': 'User logged in successfully'})
+
     except ValueError:
-        # Token is invalid
-        return JsonResponse({'error': 'The provided token is invalid'}, status=400)
-    except firebase_admin.auth.AuthError as e:
-        # Handle AuthError
-        return JsonResponse({'error': str(e)}, status=400)
+        return JsonResponse({'error': 'Invalid token'}, status=400)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
+
+@login_required
+def home(request):
+    return render(request, 'home.html')
+
+
+@login_required()
+def landing_page(request):
+    if request.user.is_authenticated:
+        return redirect('home')  # Assumes you have a named URL 'home' for your homepage
+    return render(request, 'landing.html')

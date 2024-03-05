@@ -145,4 +145,4 @@ FIREBASE_CONFIG = {
     'measurementId': os.environ.get('FIREBASE_MEASUREMENT_ID')
 }
 
-AUTH_USER_MODEL = 'SRSLingo.CustomUser'
+# AUTH_USER_MODEL = 'SRSLingo.CustomUser'
