@@ -1,8 +1,24 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock extra_css %}
+
 {% block content %}
-
-    <h1>Welcome to SRSLingo!</h1>
-
-{% endblock %}
+<div class="dashboard-layout">
+  <aside class="sidebar">
+    <a href="{#% url 'flash_cards' %#}">Flash Cards</a>
+    <a href="{#% url 'vocab_database' %#}">Vocab Database</a>
+    <a href="{#% url 'blogs' %#}">Blogs</a>
+    <a href="{#% url 'users' %#}">Users</a>
+    <!-- Add more links as needed -->
+  </aside>
+  <main class="main-view">
+    {% block dashboard_content %}
+    <!-- Dashboard main content goes here -->
+        <h1>Welcome to SRSLingo!!</h1>
+    {% endblock dashboard_content %}
+  </main>
+</div>
+{% endblock content %}
