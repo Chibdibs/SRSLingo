@@ -1,7 +1,9 @@
+import json
 import firebase_admin
 from django.contrib import messages
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -11,12 +13,30 @@ from firebase_admin import auth, credentials
 
 from SRSLingo.settings import FIREBASE_CONFIG
 from base.forms import UserRegisterForm
-# from models import CustomUser as User
 from django.contrib.auth import login
+# from models import CustomUser as User
+
 
 # Initialize Firebase Admin
 cred = credentials.Certificate("srslingo-firebase-adminsdk-i3v0c-109f95bbf5.json")
 firebase_admin.initialize_app(cred)
+
+
+@login_required
+def home(request):
+    return render(request, 'home.html')
+
+
+def landing_page(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    return render(request, 'landing.html')
+
+
+def my_view(request):
+    context = {'firebase_config': FIREBASE_CONFIG,
+               }
+    return render(request, 'base.html', context)
 
 
 def register(request):
@@ -38,47 +58,46 @@ def register(request):
     return render(request, 'registration/register.html', {'form': form})
 
 
-def my_view(request):
-    context = {'firebase_config': FIREBASE_CONFIG,
-               }
-    return render(request, 'base.html', context)
-
-
 @csrf_exempt
 @require_POST
 def verify_token(request):
-    id_token = request.POST.get('token')
+    # Parse the request body to JSON
+    data = json.loads(request.body)
+    id_token = data.get('token')
+
     try:
+        # Verify the ID token using Firebase Admin SDK
         decoded_token = auth.verify_id_token(id_token)
         uid = decoded_token.get('uid')
         email = decoded_token.get('email')
 
-        User = get_user_model()
-        user, created = User.objects.get_or_create(username=uid, defaults={'email': email})
+        # Use Django's get_user_model to reference the active user model
+        user_model = get_user_model()
+        # Get or create a user in your Django auth model
+        user, created = user_model.objects.get_or_create(username=uid, defaults={'email': email})
 
-        # Optionally set user details here
+        # If the user was created, you may want to set additional fields
         if created:
-            user.email = email  # Example: set email on user object if newly created
+            user.email = email
+            # Set other fields if necessary, like user.first_name, user.last_name, etc.
             user.save()
 
-        user.backend = 'django.contrib.auth.backends.ModelBackend'
-        login(request, user)
+        # Use Django's built-in backend for authentication
+        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
 
-        return JsonResponse({'message': 'User logged in successfully'})
+        # Return a successful login response
+        return JsonResponse({'message': 'User logged in successfully'}, status=200)
 
     except ValueError:
+        # Handle the case where the token is invalid
         return JsonResponse({'error': 'Invalid token'}, status=400)
     except Exception as e:
+        # Catch any other exceptions and return an error
         return JsonResponse({'error': str(e)}, status=500)
 
 
-@login_required
-def home(request):
-    return render(request, 'home.html')
-
-
-@login_required()
-def landing_page(request):
-    if request.user.is_authenticated:
-        return redirect('home')  # Assumes you have a named URL 'home' for your homepage
-    return render(request, 'landing.html')
+class CustomLoginView(LoginView):
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('home')  # Redirect authenticated users to the home page
+        return super().get(request, *args, **kwargs)

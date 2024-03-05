@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SRSLingo - Learn Languages</title>
+        <title>SRSLingo - Learn Any Language Fast!</title>
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
         <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
     </head>
@@ -13,9 +13,16 @@
         <header>
             <nav>
                 <!-- Navigation bar -->
-                <ul>
-                    <li><a href="{% url 'landing' %}" class="home-link">Home</a></li>
-                    <!-- Add more navigation items here -->
+                <ul class="nav-list">
+                    <li><a href="{% url 'home' %}" class="home-link">SRSLingo</a></li>
+                    <li class="auth-links">
+                        {% if not user.is_authenticated %}
+                          <a href="{% url 'login' %}">Login</a>
+                          <a href="{% url 'register' %}">Register</a>
+                        {% else %}
+                          <a href="{% url 'logout' %}">Logout</a>
+                        {% endif %}
+                    </li>
                 </ul>
             </nav>
         </header>

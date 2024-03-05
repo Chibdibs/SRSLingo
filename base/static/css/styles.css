@@ -36,6 +36,30 @@ footer {
     clear: both; /* Ensure footer is below all content */
 }
 
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.nav-list li {
+    display: flex;
+}
+
+.auth-links a {
+    margin-left: 10px; /* Spacing between links */
+}
+
 nav ul {
     list-style: none;
     padding: 0;
