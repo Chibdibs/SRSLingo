@@ -7,6 +7,8 @@
         <title>SRSLingo - Learn Any Language Fast!</title>
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
         <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+        {% block extra_css %}
+        {%  endblock extra_css %}
     </head>
 
     <body>
@@ -17,10 +19,14 @@
                     <li><a href="{% url 'dashboard' %}" class="home-link">SRSLingo</a></li>
                     <li class="auth-links">
                         {% if not user.is_authenticated %}
-                          <a href="{% url 'login' %}">Login</a>
-                          <a href="{% url 'register' %}">Register</a>
+                            <a href="{% url 'login' %}">Login</a>
+                            <a href="{% url 'register' %}">Register</a>
                         {% else %}
-                          <a href="{% url 'logout' %}">Logout</a>
+                            <a href="{#% url 'blogs' %#}">Profile</a>
+                            <a href="{#% url 'friends' %#}">Friends</a>
+                            <a href="{#% url 'blogs' %#}">Blogs</a>
+                            <a href="{#% url 'blogs' %#}">Settings</a>
+                            <a href="{% url 'logout' %}">Logout</a>
                         {% endif %}
                     </li>
                 </ul>
@@ -30,7 +36,7 @@
         <main class="content">
             {% block content %}
             <!-- Content overridden by child templates -->
-            {% endblock %}
+            {% endblock content %}
         </main>
 
         <footer>
