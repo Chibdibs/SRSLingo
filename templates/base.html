@@ -14,7 +14,7 @@
             <nav>
                 <!-- Navigation bar -->
                 <ul class="nav-list">
-                    <li><a href="{% url 'home' %}" class="home-link">SRSLingo</a></li>
+                    <li><a href="{% url 'dashboard' %}" class="home-link">SRSLingo</a></li>
                     <li class="auth-links">
                         {% if not user.is_authenticated %}
                           <a href="{% url 'login' %}">Login</a>
@@ -83,6 +83,6 @@
         }
       });
     </script>
-    <script src="{% static 'js/main.js' %}" defer></script>
+{#    <script src="{% static 'js/main.js' %}" defer></script>#}
 
 </html>

@@ -23,9 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9&hbl4%o4+l*t5_wk!*2spt+g^n=0i@lburg6&y@v+$n)4k&+='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1',
+                 'localhost',
+                 ]
 
 
 # Application definition
@@ -130,7 +132,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/accounts/login/'
 
 # Redirect to home page after login
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'dashboard'
 
 # Redirect to landing page after logout
 LOGOUT_REDIRECT_URL = 'landing'
@@ -144,5 +146,3 @@ FIREBASE_CONFIG = {
     'appId': os.environ.get('FIREBASE_APP_ID'),
     'measurementId': os.environ.get('FIREBASE_MEASUREMENT_ID')
 }
-
-# AUTH_USER_MODEL = 'SRSLingo.CustomUser'

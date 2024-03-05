@@ -1,4 +1,6 @@
 import json
+import os
+
 import firebase_admin
 from django.contrib import messages
 from django.contrib.auth import get_user_model, login
@@ -17,19 +19,21 @@ from django.contrib.auth import login
 # from models import CustomUser as User
 
 
+SDK_LINK = os.environ.get('SDK_CREDENTIALS')  # Import link from environment variables
+
 # Initialize Firebase Admin
-cred = credentials.Certificate("srslingo-firebase-adminsdk-i3v0c-109f95bbf5.json")
+cred = credentials.Certificate(SDK_LINK)
 firebase_admin.initialize_app(cred)
 
 
 @login_required
-def home(request):
-    return render(request, 'home.html')
+def dashboard(request):
+    return render(request, 'dashboard.html')
 
 
 def landing_page(request):
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('dashboard')
     return render(request, 'landing.html')
 
 
@@ -40,6 +44,10 @@ def my_view(request):
 
 
 def register(request):
+    # Redirect authenticated users to the dashboard page
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
@@ -99,5 +107,5 @@ def verify_token(request):
 class CustomLoginView(LoginView):
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect('home')  # Redirect authenticated users to the home page
+            return redirect('dashboard')  # Redirect authenticated users to the dashboard page
         return super().get(request, *args, **kwargs)
