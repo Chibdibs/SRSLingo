@@ -20,7 +20,8 @@ from django.contrib.auth import login
 
 
 SDK_LINK = os.environ.get('SDK_CREDENTIALS')  # Import link from environment variables
-
+if not SDK_LINK:
+    raise ValueError("SDK_CREDENTIALS environment variable is not set.")
 # Initialize Firebase Admin
 cred = credentials.Certificate(SDK_LINK)
 firebase_admin.initialize_app(cred)

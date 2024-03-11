@@ -17,7 +17,7 @@
 
 <script>
     let currentCard = 0;
-    let flashcards = {{  flashcards|safe }};
+    let flashcards = JSON.parse('{{ flashcards_json|safe }}')
     {#let flashcards = "yes";#}
 
     function flipCard() {
@@ -40,11 +40,9 @@
 
     function updateCard() {
         let card = flashcards[currentCard];
-        document.getElementById('front').innerHTML = card.front_text;
+        document.getElementById('front').innerHTML = "Click to see the answer";
         document.getElementById('back').innerHTML = card.back_text;
-        // Reset to show the front side of the next card
-        document.getElementById('front').style.display = "block";
-        document.getElementById('back').style.display = "none";
+        flipCard();
     }
 
     window.onLoad = updateCard; // Initialize the first card
