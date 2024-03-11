@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/flashcards.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div id="flashcard-container">
+    <h1>Flashcards</h1>
+    <div id="flashcard" onclick="flipCard()">
+        <div id="front" class="side">Click to see the answer</div>
+        <div id="back" class="side" style="display: none;">Answer</div>
+    </div>
+    <button onclick="nextCard()">Next Card</button>
+</div>
+
+<script>
+    let currentCard = 0;
+    let flashcards = {{  flashcards|safe }};
+    {#let flashcards = "yes";#}
+
+    function flipCard() {
+        let front = document.getElementById('front');
+        let back = document.getElementById('back');
+        // Toggle visibility
+        if (front.style.display === "none") {
+            front.style.display = "block";
+            back.style.display = "none";
+        } else {
+            front.style.display = "none";
+            back.style.display = "block";
+        }
+    }
+
+    function nextCard() {
+        currentCard = (currentCard + 1) % flashcards.length;
+        updateCard();
+    }
+
+    function updateCard() {
+        let card = flashcards[currentCard];
+        document.getElementById('front').innerHTML = card.front_text;
+        document.getElementById('back').innerHTML = card.back_text;
+        // Reset to show the front side of the next card
+        document.getElementById('front').style.display = "block";
+        document.getElementById('back').style.display = "none";
+    }
+
+    window.onLoad = updateCard; // Initialize the first card
+</script>
+
+{%  endblock %}

@@ -3,5 +3,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('base.urls')),  # Assuming 'base' is the app where you have 'landing' and 'home' views
+    path('', include('base.urls')),  # Base App
+    path('', include('language_app.urls')),  # User's language App
 ]
