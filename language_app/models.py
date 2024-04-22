@@ -8,3 +8,4 @@ class Flashcard(models.Model):
 
     def __str__(self): # test
         return self.front_text[:50]
+# testing 2
