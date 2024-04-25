@@ -8,3 +8,7 @@ class Flashcard(models.Model):
 
     def __str__(self):
         return self.front_text[:50]
+# // uhgghjigjk
+# // uhgghjigjk
+# // uhgghjigjk
+# // uhgghjigjk
