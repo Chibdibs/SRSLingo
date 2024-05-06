@@ -11,6 +11,4 @@ class Flashcard(models.Model):
 # war never changes
 # war never changes
 # war never changes
-# war never changes
-# war never changes
-
+# war never
