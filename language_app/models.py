@@ -8,7 +8,3 @@ class Flashcard(models.Model):
 
     def __str__(self):
         return self.front_text[:50]
-# war never changes
-# war never changes
-# war never changes
-# war never
