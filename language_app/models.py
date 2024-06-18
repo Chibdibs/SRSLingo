@@ -12,4 +12,3 @@ class Flashcard(models.Model):
 # sdfsfsdffs
 # sdfsfsdffs
 # sdfsfsdffs
-# sdfsfsdffs
