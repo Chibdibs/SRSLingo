@@ -10,3 +10,8 @@ class Flashcard(models.Model):
         return self.front_text[:50]
 
 # sdfsdfsdfsd
+# sdfsdfsdfsd
+# sdfsdfsdfsd
+# sdfsdfsdfsd
+# sdfsdfsdfsd
+# sdfsdfsdfsd
